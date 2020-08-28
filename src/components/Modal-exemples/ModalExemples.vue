@@ -67,12 +67,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-    .container {
-        width: 100%;
-        padding: 30px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-</style>
