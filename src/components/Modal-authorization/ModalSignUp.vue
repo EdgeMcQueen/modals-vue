@@ -30,12 +30,18 @@
                           v-model="password"
                           :class="{error: $v.password.$error}"
                           @change="$v.password.$touch()">
-                          <button @click="$emit('show-pass')" class="show-password" :class="typeOfPassword.showPassClass"></button>
+                          <input
+                            type="button"
+                            @click="$emit('show-pass')"
+                            class="show-password"
+                            :class="typeOfPassword.showPassClass">
                     </div>
                 </div>
             </div>
             <!-- log in button -->
             <button class="btn btnPrimary">sign up</button>
+            <!-- is haven't account -->
+            <a href="#" class="change-modal" @click="$emit('change-sign-modal')">I need to account</a>
             </form>
         </div>
         </ModalTemplate>

@@ -3,7 +3,7 @@
     <div class="buttons-container">
     <button class="btn btnPrimary" @click="modalTemplateShow = !modalTemplateShow">Show modal temlate</button>
     <button class="btn btnPrimary" @click="modalExemplesShow = !modalExemplesShow">Show modal exemple</button>
-    <button class="btn btnPrimary" @click="modalAuthorization = !modalAuthorization">Show modal exemple</button>
+    <button class="btn btnPrimary" @click="modalAuthorization = !modalAuthorization">Show modal authorization</button>
     </div>
     <!-- modal template -->
     <ModalTemplate

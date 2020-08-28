@@ -1,21 +1,23 @@
 <template>
-    <div class="container">
+    <div class="modal-auth">
         <!-- sign up -->
-        <button class="btn btnPrimary" @click="showSignUp = !showSignUp">Sign up</button>
+        <input type="button" @click="showSignUp = !showSignUp" value="Sign up">
         <ModalSignUp
             v-show="showSignUp"
             @close="showSignUp = false"
             :typeOfPassword="typeOfPassword"
-            @show-pass="showPassword"/>
+            @show-pass="showPassword"
+            @change-sign-modal="changeSignModal"/>
 
         <!-- sign in -->
-        <button class="btn btnPrimary" @click="showSignIn = !showSignIn">Sign in</button>
+        <input type="button" @click="showSignIn = !showSignIn" value="Sign in">
         <ModalSignIn
             v-show="showSignIn"
             @close="showSignIn = false"
             :typeOfPassword="typeOfPassword"
             @show-pass="showPassword"
-            @show-rep-pass="showPasswordRepeat"/>
+            @show-rep-pass="showPasswordRepeat"
+            @change-sign-modal="changeSignModal"/>
     </div>
 </template>
 
@@ -73,10 +75,29 @@ export default {
           this.typeOfPassword.showRepPassClass = 'show'
         }
       },
+      changeSignModal () {
+          this.showSignIn = !this.showSignIn
+          this.showSignUp = !this.showSignUp
+      }
   },
 }
 </script>
 <style lang="scss">
+    .modal-auth {
+        display: flex;
+        justify-content: flex-end;
+        padding: 30px 0;
+    }
+    .change-modal {
+        display: block;
+        width: fit-content;
+        margin: 20px auto;
+        border-bottom: 1px solid black;
+
+        &:visited {
+            color: black;
+        }
+    }
   .password-wrapper {
     position: relative;
   }

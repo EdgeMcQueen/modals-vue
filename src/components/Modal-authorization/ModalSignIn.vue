@@ -42,7 +42,10 @@
                           v-model="password"
                           :class="{error: $v.password.$error}"
                           @change="$v.password.$touch()">
-                          <button @click="$emit('show-pass')" class="show-password" :class="typeOfPassword.showPassClass"></button>
+                          <input
+                            @click="$emit('show-pass')"
+                            class="show-password"
+                            :class="typeOfPassword.showPassClass">
                     </div>
                 </div>
                 <!-- repeat password -->
@@ -55,12 +58,18 @@
                           v-model="repeatPassword"
                           :class="{error: $v.repeatPassword.$error}"
                           @change="$v.repeatPassword.$touch()"/>
-                          <button @click="$emit('show-rep-pass')" class="show-password" :class="typeOfPassword.showRepPassClass"></button>
+                          <input
+                            type="button"
+                            @click="$emit('show-rep-pass')"
+                            class="show-password"
+                            :class="typeOfPassword.showRepPassClass">
                     </div>
                 </div>
             </div>
             <!-- log in button -->
             <button class="btn btnPrimary">sign in</button>
+            <!-- is have account -->
+            <a href="#" class="change-modal" @click="$emit('change-sign-modal')">I have account</a>
             </form>
         </div>
         </ModalTemplate>
