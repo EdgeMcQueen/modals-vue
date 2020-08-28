@@ -26,6 +26,7 @@
     </ModalExemples>
     <!-- modal authorization -->
     <ModalAuthorization
+      :signUpShow="signUpShow"
       :signInShow="signInShow"
       v-show="modalAuthorization">
 
@@ -57,6 +58,7 @@ export default {
         email: ''
       },
       modalValidate: false,
+      signUpShow: false,
       signInShow: false
     }
   },

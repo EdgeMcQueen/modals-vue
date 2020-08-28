@@ -5,7 +5,7 @@
         @close="$emit('close')">
 
         <div slot="body">
-            <form @submit.prevent="onSignIn">
+            <form @submit.prevent="onSignUp">
             <!-- require login -->
             <div class="form-item" :class="{ errorInput: $v.login.$error }">
                 <label>Login:</label>
@@ -17,18 +17,6 @@
                         v-model="login"
                         :class="{error: $v.login.$error}"
                         @change="$v.login.$touch()">
-            </div>
-            <!-- require email -->
-            <div class="form-item" :class="{ errorInput: $v.email.$error }">
-                <label>Email:</label>
-                <p class="errorText" v-if="!$v.email.required">
-                        Field is required!</p>
-                <p class="errorText" v-if="!$v.email.email">
-                        Email is not correct!</p>
-                    <input
-                        v-model="email"
-                        :class="{error: $v.email.$error}"
-                        @change="$v.email.$touch()">
             </div>
             <!-- password -->
             <div>
@@ -45,22 +33,9 @@
                           <button @click="$emit('show-pass')" class="show-password" :class="typeOfPassword.showPassClass"></button>
                     </div>
                 </div>
-                <!-- repeat password -->
-                <div class="form-item" :class="{ errorInput: $v.repeatPassword.$error }">
-                    <label>Repeat password</label>
-                    <p class="errorText" v-if="!$v.repeatPassword.sameAsPassword.$error">Passwords must be identical.</p>
-                    <div class="password-wrapper">
-                      <input
-                          :type="typeOfPassword.repeatPasswordType"
-                          v-model="repeatPassword"
-                          :class="{error: $v.repeatPassword.$error}"
-                          @change="$v.repeatPassword.$touch()"/>
-                          <button @click="$emit('show-rep-pass')" class="show-password" :class="typeOfPassword.showRepPassClass"></button>
-                    </div>
-                </div>
             </div>
             <!-- log in button -->
-            <button class="btn btnPrimary">sign in</button>
+            <button class="btn btnPrimary">sign up</button>
             </form>
         </div>
         </ModalTemplate>
@@ -68,9 +43,9 @@
 </template>
 
 <script>
-import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
-
 import ModalTemplate from '../Modal/UI/ModalTemplate.vue';
+import { required, minLength, email } from 'vuelidate/lib/validators'
+
 export default {
   components: {
     ModalTemplate,
@@ -81,50 +56,36 @@ export default {
       required: true
     }
   },
-    data() {
+  data() {
       return {
           login: '',
-          email: '',
           password: '',
-          repeatPassword: '',
       }
   },
-  validations: {
+    validations: {
     login: {
       required,
       minLength: minLength(4)
-    },
-    email: {
-      required,
-      email
     },
     password: {
       required,
       minLength: minLength(6)
     },
-    repeatPassword: {
-      sameAsPassword: sameAs('password')
-    }
   },
-  methods: {
-      onSignIn () {
+      methods: {
+      onSignUp () {
           this.$v.$touch()
           if (!this.$v.$invalid) {
               const login = {
                   login: this.login,
-                  email: this.email,
                   password: this.password,
               }
-              const repeatPassword = this.repeatPassword
               console.log(login)
 
               // done
               this.login = ''
-              this.email = ''
               this.password = ''
-              this.repeatPassword = '',
               this.passwordType = 'password',
-              this.repeatPasswordType = 'password',
               this.$v.$reset()
               this.$emit('close')
           }
