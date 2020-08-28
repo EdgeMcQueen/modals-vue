@@ -38,11 +38,11 @@
                     <p class="errorText" v-if="!$v.password.minLength">Password must have at least {{ $v.password.$params.minLength.min }} letters.</p>
                     <div class="password-wrapper">
                       <input
-                          :type="passwordType"
+                          :type="typeOfPassword.passwordType"
                           v-model="password"
                           :class="{error: $v.password.$error}"
                           @change="$v.password.$touch()">
-                          <button @click="showPassword" class="show-password" :class="showPassClass"></button>
+                          <button @click="$emit('show-pass')" class="show-password" :class="typeOfPassword.showPassClass"></button>
                     </div>
                 </div>
                 <!-- repeat password -->
@@ -51,11 +51,11 @@
                     <p class="errorText" v-if="!$v.repeatPassword.sameAsPassword.$error">Passwords must be identical.</p>
                     <div class="password-wrapper">
                       <input
-                          :type="repeatPasswordType"
+                          :type="typeOfPassword.repeatPasswordType"
                           v-model="repeatPassword"
                           :class="{error: $v.repeatPassword.$error}"
                           @change="$v.repeatPassword.$touch()"/>
-                          <button @click="showPasswordRepeat" class="show-password" :class="showRepPassClass"></button>
+                          <button @click="$emit('show-rep-pass')" class="show-password" :class="typeOfPassword.showRepPassClass"></button>
                     </div>
                 </div>
             </div>
@@ -75,16 +75,18 @@ export default {
   components: {
     ModalTemplate,
   },
+  props: {
+    typeOfPassword: {
+      type: Object,
+      required: true
+    }
+  },
     data() {
       return {
           login: '',
           email: '',
           password: '',
           repeatPassword: '',
-          passwordType: 'password',
-          repeatPasswordType: 'password',
-          showPassClass: 'show',
-          showRepPassClass: 'show'
       }
   },
   validations: {
@@ -126,26 +128,6 @@ export default {
               this.$v.$reset()
               this.$emit('close')
           }
-      },
-      showPassword() {
-        if (this.passwordType == 'password') {
-          this.passwordType = 'text'
-          this.showPassClass = 'hide'
-          }
-        else {
-          this.passwordType = 'password'
-          this.showPassClass = 'show'
-        }
-      },
-      showPasswordRepeat() {
-        if (this.repeatPasswordType == 'password') {
-          this.repeatPasswordType = 'text'
-          this.showRepPassClass = 'hide'
-          }
-        else {
-          this.repeatPasswordType = 'password'
-          this.showRepPassClass = 'show'
-        }
       },
   }
 }
