@@ -1,21 +1,19 @@
 <template>
   <transition name="modal">
-  <div class="modal__wrapper" @mousedown.self="$emit('close')">
-    <div class="modal-content">
+    <div class="modal__wrapper" @mousedown.self="$emit('close')">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <span class="modal-title">{{ title }}</span>
+          <span class="button-close" @click="$emit('close')">×</span>
+        </div>
 
-      <!-- header -->
-      <div class="modal-header">
-        <span class="modal-title"> {{ title }} </span>
-        <span class="button-close" @click="$emit('close')">×</span>
+        <!-- body -->
+        <div class="modal-body">
+          <slot name="body"></slot>
+        </div>
       </div>
-
-      <!-- body -->
-      <div class="modal-body">
-        <slot name="body"></slot>
-      </div>
-
     </div>
-  </div>
   </transition>
 </template>
 
@@ -24,31 +22,31 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
-    document.body.addEventListener('keyup', e => {
-      if (e.keyCode === 27) this.$emit('close')
-    })
+    document.body.addEventListener("keyup", (e) => {
+      if (e.keyCode === 27) this.$emit("close");
+    });
   },
   computed: {},
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
 // animation
-.modal-enter, .modal-leave-active {
+.modal-enter,
+.modal-leave-active {
   opacity: 0;
 }
 .modal-enter .modal-content,
 .modal-leave-active .modal-content {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
-
-.modal__wrapper{
+.modal__wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,9 +55,9 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: opacity .2s ease;
+  transition: opacity 0.2s ease;
   z-index: 998;
-  background-color: rgba(00,00,00,.48);
+  background-color: rgba(00, 00, 00, 0.48);
 }
 
 .modal-content {
@@ -68,7 +66,7 @@ export default {
   padding: 20px 18px;
   background-color: #fff;
   border: 1px solid #dcdfe6;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   border-radius: 8px;
   z-index: 999;
   overflow: hidden;
@@ -91,7 +89,4 @@ export default {
 .modal-body {
   text-align: center;
 }
-
-
-
 </style>
