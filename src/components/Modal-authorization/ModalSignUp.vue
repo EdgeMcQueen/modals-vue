@@ -41,7 +41,7 @@
             <!-- log in button -->
             <button class="btn btnPrimary">sign up</button>
             <!-- is haven't account -->
-            <a href="#" class="change-modal" @click="$emit('change-sign-modal')">I need to account</a>
+            <a href="#" class="modal-auth__link" @click="$emit('change-sign-modal')">I need to account</a>
             </form>
         </div>
         </ModalTemplate>

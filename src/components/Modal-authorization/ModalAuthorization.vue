@@ -1,7 +1,7 @@
 <template>
     <div class="modal-auth">
         <!-- sign up -->
-        <input type="button" @click="showSignUp = !showSignUp" value="Sign up">
+        <input class="modal-auth__button" type="button" @click="showSignUp = !showSignUp" value="Sign up">
         <ModalSignUp
             v-show="showSignUp"
             @close="showSignUp = false"
@@ -10,7 +10,7 @@
             @change-sign-modal="changeSignModal"/>
 
         <!-- sign in -->
-        <input type="button" @click="showSignIn = !showSignIn" value="Sign in">
+        <input class="modal-auth__button" type="button" @click="showSignIn = !showSignIn" value="Sign in">
         <ModalSignIn
             v-show="showSignIn"
             @close="showSignIn = false"
@@ -87,17 +87,28 @@ export default {
         display: flex;
         justify-content: flex-end;
         padding: 30px 0;
-    }
-    .change-modal {
+        &__link {
         display: block;
-        width: fit-content;
         margin: 20px auto;
-        border-bottom: 1px solid black;
+        text-decoration: underline;
+        text-underline-position: under;
+            &:visited {
+                color: black;
+            }
+        }
 
-        &:visited {
-            color: black;
+        &__button {
+            display: inline-flex;
+            width: fit-content;
+            margin-right: 20px;
+            padding: 3px;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid black;
+            background: none;
         }
     }
+
   .password-wrapper {
     position: relative;
   }

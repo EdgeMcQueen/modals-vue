@@ -1,10 +1,12 @@
 <template>
   <div class="container">
+    <!-- modal show buttons group -->
     <div class="buttons-container">
-    <button class="btn btnPrimary" @click="modalTemplateShow = !modalTemplateShow">Show modal temlate</button>
-    <button class="btn btnPrimary" @click="modalExemplesShow = !modalExemplesShow">Show modal exemple</button>
-    <button class="btn btnPrimary" @click="modalAuthorization = !modalAuthorization">Show modal authorization</button>
+    <button class="btn btnPrimary" v-bind="resetModals" @click="modalTemplateShow = !modalTemplateShow">Show modal temlate</button>
+    <button class="btn btnPrimary" v-bind="resetModals" @click="modalExemplesShow = !modalExemplesShow">Show modal exemple</button>
+    <button class="btn btnPrimary" v-bind="resetModals" @click="modalAuthorization = !modalAuthorization">Show modal authorization</button>
     </div>
+
     <!-- modal template -->
     <ModalTemplate
       title="Modal template title"
@@ -16,6 +18,7 @@
         <button class="btn btnPrimary" @click="modalTemplateShow = !modalTemplateShow">Done!</button>
       </div>
     </ModalTemplate>
+
     <!-- modal exemles -->
     <ModalExemples
       :modalFirst="modalFirst"
@@ -24,6 +27,7 @@
       v-show="modalExemplesShow">
 
     </ModalExemples>
+
     <!-- modal authorization -->
     <ModalAuthorization
       :signUpShow="signUpShow"
@@ -72,6 +76,22 @@ export default {
       this.modalSecond.email = ''
       this.modalSecond.show = false
 
+    }
+  },
+  computed: {
+    resetModals () {
+      if (this.modalTemplateShow == true) {
+          this.modalExemplesShow = false
+          this.modalAuthorization = false
+      }
+      if (this.modalExemplesShow == true) {
+          this.modalTemplateShow = false
+          this.modalAuthorization = false
+      }
+      if (this.modalAuthorization == true) {
+          this.modalTemplateShow = false
+          this.modalExemplesShow = false
+      }
     }
   },
 
