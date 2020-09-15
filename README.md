@@ -1,2 +1,2 @@
-# modals-vue
-tocoder.ru
+# webpack-edge
+Сборка webpack

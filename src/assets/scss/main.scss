@@ -1,0 +1,9 @@
+// тк мы к ним обращаемся везде ниже
+@import "utils/vars";
+@import "utils/reset";
+// Потключение библиотек
+@import "libs/libs";
+// Преднастройки
+@import "stylesheets/stylesheets";
+
+@import "./common.scss";
